@@ -1,1 +1,1 @@
-# LISA-QPD-Gap-Response-Investigation
+# LISA: QPD Gap Response Investigation
