@@ -34,7 +34,7 @@ def erf_model(x, A, B, C, D):
 
 # ====================================== DATA ==================================================== #
 data_dirs = {
-    'Y_A': "/Users/asca/Documents/University/Master Thesis/code/Data/VIGO17_NS089008_QPD_0750_20_AS_015_CC_asca_250616_YScan_LB1761C_quadA_final/Y5100um"
+    'Y_A': "/Users/asca/Documents/University/Master Thesis/code/Data/VIGO17_NS089008_QPD_0750_20_AS_015_CC_asca_250617_YScan_LB1471C_quadA_1/Y6100um"
 }
 
 # Function to load data 

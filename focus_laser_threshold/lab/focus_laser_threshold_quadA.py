@@ -1,6 +1,6 @@
 ''' 
 This code runs a laser focus scan experiment using translation stages and a digital multimeter (DMM) to measure the photocurrent at different positions. 
-Main characteristics of the code: thresholds implemented for adaptive step sizes in X and Z directions
+Main characteristic of the code: thresholds implemented for adaptive step sizes in X and Z directions
 '''
 
 import io
@@ -220,7 +220,7 @@ y_array = np.linspace(ystart, ystop, step_y)
 # Adaptive Z step sizes
 zstart = focuslaser_jsonconfig['global_params']['zstart_um']
 zstop = focuslaser_jsonconfig['global_params']['zstop_um']
-zstep_big = focuslaser_jsonconfig['global_params']['zstep_coarse_um']
+zstep_big = focuslaser_jsonconfig['global_params']['zstep_big_um']
 zstep_fine = focuslaser_jsonconfig['global_params']['zstep_fine_um']
 z_threshold_start = focuslaser_jsonconfig['global_params']['z_threshold_start_um']
 z_threshold_stop = focuslaser_jsonconfig['global_params']['z_threshold_stop_um']
