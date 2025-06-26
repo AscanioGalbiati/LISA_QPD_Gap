@@ -1,3 +1,17 @@
+''' 
+This code processes data for linescans executed along the x direction at a fixed Y height.
+This initial code version processes data from a series orom a series of .pkl files, extracting the DC photocurrent and calculating the beam waist for the quadD segment.
+
+Compatible data: 
+final_data/20250506/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250506_LB1761C_quadD_XYScan/Y...
+final_data/20250507/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250507_LB1761C_quadD/Y5900
+final_data/20250508/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250508_LB1761C_quadD/Y...
+final_data/20250512/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250508_LB1761C_quadA/Y...
+
+Folder structure: 
+final_data/QPDspecs_date_lens_quad/Y...
+'''
+
 import re
 import sys
 import h5py
@@ -25,7 +39,7 @@ def erf_model(x, A, B, C, D):
     return A * erf(B * (x - C)) + D
 
 # ====================================== DATA ==================================================== #
-data_dir = "/Users/asca/Documents/University/Master Thesis/code/Data/VIGO17_NS089008_QPD_0750_20_AS_015_CC_asca_9/Y5800um"
+data_dir = "/Users/asca/Documents/University/Master Thesis/code/Data/VIGO17_NS089008_QPD_0750_20_AS_015_CC_asca_14_A/Y6600um"
 fig_dir = os.path.join(data_dir, "fig")  # Directory for saving figures
 os.makedirs(fig_dir, exist_ok=True)
 
@@ -92,6 +106,7 @@ ax30.tick_params(axis='both', which='major', labelsize=10, length=6, width=1.5, 
 title30 = r'\textbf{DC Photocurrent}'
 ax30.set_title(title30, fontsize=14, fontweight='bold', pad=10)
 
+ystep = 100
 # Loop over .pkl files
 for i, pkl_file in enumerate(file_list):
     # Load the data
@@ -101,14 +116,19 @@ for i, pkl_file in enumerate(file_list):
     # Use the Z position extracted from the filename
     current_z = z_values[i]  # Z in mm
 
+    # Use X scan parameters (since experiment scans X for each Y, Z)
+    step = int((data['global_params']['xstop_um'] - data['global_params']['xstart_um']) / data['global_params']['xstep_um']) + 1
+    pos_array = np.linspace(data['global_params']['xstart_um'], data['global_params']['xstop_um'], step)
+
+    '''
     # Determine if X or Y line scan and calculate the position array (in µm)
     if data['global_params']['xstart_um'] == data['global_params']['xstop_um']:
         step = int((data['global_params']['ystop_um'] - data['global_params']['ystart_um']) / data['global_params']['xystep_um']) + 1
         pos_array = np.linspace(data['global_params']['ystart_um'], data['global_params']['ystop_um'], step)
     elif data['global_params']['ystart_um'] == data['global_params']['ystop_um']:
-        step = int((data['global_params']['xstop_um'] - data['global_params']['xstart_um']) / data['global_params']['xystep_um']) + 1
+        step = int((data['global_params']['xstop_um'] - data['global_params']['xstart_um']) / ystep) + 1
         pos_array = np.linspace(data['global_params']['xstart_um'], data['global_params']['xstop_um'], step)
-
+    '''
     # Process only quadD data
     segn = 'quadD'
     if segn in data['rawdata'] and 'dmm00_curr_amp' in data['rawdata'][segn]:
@@ -132,13 +152,12 @@ for i, pkl_file in enumerate(file_list):
             continue
 
         # Plot the raw DC data
-        #x30.plot(pos_array / 1000, dc_curr_avg)  # Convert µm to mm, you can add: label=f'Z={current_z} mm
-        #if 'dmm00_curr_amp' in data['rawdata'][segn]:
-        
-        #ax30.plot(pos_array / 1000, data['rawdata'][segn]['dmm00_curr_amp'].mean(axis=1), label=f'Z={current_z:.1f} mm')  # Convert µm to mm
-        # plot filtered data
+        ax30.plot(pos_array / 1000, data['rawdata'][segn]['dmm00_curr_amp'].mean(axis=1), label=f'Z={current_z:.1f} mm')  # Convert µm to mm
+        '''
+        # Plot filtered data
         if current_z < 6:
             ax30.plot(pos_array / 1000, data['rawdata'][segn]['dmm00_curr_amp'].mean(axis=1), label=f'Z={current_z:.1f} mm')  # Convert µm to mm
+        '''
         print(f"B fit DC: {B_fit_dc:.4f}")
         print(f"Z position: {current_z:.1f} mm, Beam waist (DC): {spot_size_dc:.2f} µm")
 

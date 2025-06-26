@@ -2,6 +2,11 @@
 This code processes data from a series of .pkl files, extracting the DC photocurrent and calculating the beam waist for the quadD segment.
 
 Compatible data: 
+final_data/20250616/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250616_LB1471C_quadD/Y...
+final_data/20250617/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250617_LB1471C_quadD/Y...
+
+Folder structure: 
+final_data/QPDspecs_date_lens_quad/Y...
 
 '''
 
