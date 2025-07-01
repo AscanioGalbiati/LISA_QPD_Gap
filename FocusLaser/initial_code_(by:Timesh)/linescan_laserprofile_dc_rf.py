@@ -1,3 +1,11 @@
+''' 
+This code processes data from a series of .pkl files, extracting the DC and RF photocurrent and calculating the beam waist for two segments of the QPD (quadA and quadD). 
+This data was aquired on 20250114 and 20250113 with the fiber laser setup.
+
+Compatible data: 
+"final_data/20250114/BeamProfile (i.e. first data from Timesh)/20250114",
+"final_data/20250114/BeamProfile (i.e. first data from Timesh)/20250113"
+'''
 import re
 import sys
 import h5py
