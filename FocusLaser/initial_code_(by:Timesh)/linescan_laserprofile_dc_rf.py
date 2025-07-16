@@ -34,8 +34,8 @@ def erf_model(x, A, B, C, D):
 
 # ====================================== DATA ==================================================== #
 data_dirs = [
-    "/Users/asca/Documents/University/Master Thesis/code/Data/BeamProfile/20250114",
-    "/Users/asca/Documents/University/Master Thesis/code/Data/BeamProfile/20250113"
+    "/Users/asca/Documents/University/Master Thesis/code/Data/BeamProfile (i.e. first data from Timesh)/20250114",
+    "/Users/asca/Documents/University/Master Thesis/code/Data/BeamProfile (i.e. first data from Timesh)/20250113"
 ]
 fig_dir = os.path.join(data_dirs[0], "fig")  # Use the first directory for saving figures
 os.makedirs(fig_dir, exist_ok=True)
