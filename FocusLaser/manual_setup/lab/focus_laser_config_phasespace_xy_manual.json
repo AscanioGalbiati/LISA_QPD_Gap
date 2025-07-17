@@ -15,12 +15,12 @@
  "global_params":
     {
      "number_averages": 3,
-     "xstart_um": 1,
-     "xstop_um": 8.0,
-     "ystart_um": 1,
-     "ystop_um": 9,
-     "xstep_um": 0.2,
-     "ystep_um": 0.25
+     "xstart_mm": 1,
+     "xstop_mm": 8.0,
+     "ystart_mm": 1,
+     "ystop_mm": 9,
+     "xstep_mm": 0.2,
+     "ystep_mm": 0.25
     },
 
  "dmm00":

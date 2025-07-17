@@ -155,7 +155,7 @@ if 'lta00' in focuslaser_jsonconfig.keys():
                                 focuslaser_jsonconfig['lta00']['conn']['force'])
     # Force home movement. Comment out line if not want to go home. TODO, fix COEX homing.
     lta00.write('1OR') 
-    ypos = stage.conex.move(lta00, 1, float(focuslaser_jsonconfig['global_params']['ystart_um']), 'abs')
+    ypos = stage.conex.move(lta00, 1, float(focuslaser_jsonconfig['global_params']['ystart_mm']), 'abs')
 
 # -------------------- TRAC stage config -------------------- #
 print("Trying to open TRAC00 stage on:", focuslaser_jsonconfig['lta01']['conn']['address'])
@@ -169,21 +169,21 @@ if 'lta01' in focuslaser_jsonconfig.keys():
                               focuslaser_jsonconfig['lta01']['conn']['force'])
     # Force home movement. Comment out line if not want to go home. TODO, fix COEX homing.
     lta01.write('1OR') 
-    xpos = stage.conex.move(lta01, 1, float(focuslaser_jsonconfig['global_params']['xstart_um']), 'abs')
+    xpos = stage.conex.move(lta01, 1, float(focuslaser_jsonconfig['global_params']['xstart_mm']), 'abs')
 
 # -------------------- Configure scan parameters -------------------- #
 
 # Calculate the step in x direction
-step_x = int((focuslaser_jsonconfig['global_params']['xstop_um'] - focuslaser_jsonconfig['global_params']['xstart_um'])/focuslaser_jsonconfig['global_params']['xstep_um']) + 1
+step_x = int((focuslaser_jsonconfig['global_params']['xstop_mm'] - focuslaser_jsonconfig['global_params']['xstart_mm'])/focuslaser_jsonconfig['global_params']['xstep_mm']) + 1
 
  # Generate x array for the scan
-x_array = np.linspace(focuslaser_jsonconfig['global_params']['xstart_um'], focuslaser_jsonconfig['global_params']['xstop_um'], step_x)
+x_array = np.linspace(focuslaser_jsonconfig['global_params']['xstart_mm'], focuslaser_jsonconfig['global_params']['xstop_mm'], step_x)
 
 # Calculate the step in y direction
-step_y = int((focuslaser_jsonconfig['global_params']['ystop_um'] - focuslaser_jsonconfig['global_params']['ystart_um'])/focuslaser_jsonconfig['global_params']['ystep_um']) + 1
+step_y = int((focuslaser_jsonconfig['global_params']['ystop_mm'] - focuslaser_jsonconfig['global_params']['ystart_mm'])/focuslaser_jsonconfig['global_params']['ystep_mm']) + 1
 
 # Generate y array for the scan
-y_array = np.linspace(focuslaser_jsonconfig['global_params']['ystart_um'], focuslaser_jsonconfig['global_params']['ystop_um'], step_y)
+y_array = np.linspace(focuslaser_jsonconfig['global_params']['ystart_mm'], focuslaser_jsonconfig['global_params']['ystop_mm'], step_y)
 
 # -------------------- Save location config -------------------- #
 # Data save location
@@ -231,7 +231,7 @@ for y in y_array:
     try:
         ypos = stage.conex.move(lta00, 1, float(y), 'abs')
     except visa.VisaIOError as e:
-        print(f"Error moving Y stage to {y} um: {e}")
+        print(f"Error moving Y stage to {y} mm: {e}")
         lta00.clear()
         time.sleep(1)
         continue
@@ -261,7 +261,7 @@ for y in y_array:
         try:
             xpos = stage.conex.move(lta01, 1, float(x), 'abs')
         except visa.VisaIOError as e:
-            print(f"Error moving X stage to {x} um: {e}")
+            print(f"Error moving X stage to {x} mm: {e}")
             lta01.clear()
             time.sleep(1)
             continue
@@ -282,12 +282,12 @@ for y in y_array:
                     time.sleep(0.05)
                     temp_measurements[i] = dmm00.query_ascii_values("FETC?")[0]
                 except Exception as e:
-                    print(f"Error in single measurement {i+1} at X={x} um, Y={y} um: {e}")
+                    print(f"Error in single measurement {i+1} at X={x} mm, Y={y} mm: {e}")
                     temp_measurements[i] = np.nan
             data['rawdata']['quadA']['dmm00_curr_amp'][idx] = temp_measurements
-            print(f"Y={y} um, X={x} um, DC photocurrent = {np.mean(temp_measurements):.7f} A")
+            print(f"Y={y} mm, X={x} mm, DC photocurrent = {np.mean(temp_measurements):.7f} A")
         except Exception as e:
-            print(f"Error measuring at Y={y} um, X={x} um: {e}")
+            print(f"Error measuring at Y={y} mm, X={x} mm: {e}")
             data['rawdata']['quadA']['dmm00_curr_amp'][idx] = np.nan
 
     print(f"DC photocurrent = {np.mean(temp_measurements)}")
@@ -324,8 +324,8 @@ for y in y_array:
     plt.show()
 
 # -------------------- Cleanup -------------------- #
-stage.conex.move(lta01, 1, float(focuslaser_jsonconfig['global_params']['xstart_um']), 'abs')
-stage.conex.move(lta00, 1, float(focuslaser_jsonconfig['global_params']['ystart_um']), 'abs')
+stage.conex.move(lta01, 1, float(focuslaser_jsonconfig['global_params']['xstart_mm']), 'abs')
+stage.conex.move(lta00, 1, float(focuslaser_jsonconfig['global_params']['ystart_mm']), 'abs')
 rm.close()
 
 print("Experiment complete!")
