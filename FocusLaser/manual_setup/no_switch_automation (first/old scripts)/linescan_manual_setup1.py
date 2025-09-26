@@ -2,7 +2,10 @@
 This code processes data from a series of .pkl files, extracting and plotting the DC photocurrent for each Y position.
 
 Compatible data: 
-final_data/20250715/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250715_YScan_LB1471C_quadA_manual_setup
+/Users/asca/Documents/University/Master Thesis/code/Data/final_data/20250910/VIGO17_333-2_QPD_0750_20_AP_011_CC_250910_LB1471C_quadA_manual_setup_fixedY_Z50mm (this is data from quadA but labelled as quadC)
+/Users/asca/Documents/University/Master Thesis/code/Data/final_data/20250910/VIGO17_333-2_QPD_0750_20_AP_011_CC_250910_LB1471C_quadA_manual_setup_fixedY_Z50mm
+
+
 
 Folder structure: 
 final_data/QPDspecs_date_YScan_lens_quad_manual_setup
@@ -24,7 +27,7 @@ plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Computer Modern']
 
 # Base directory containing Y-position folders
-base_dir = "/Users/asca/Documents/University/Master Thesis/code/Data/manual setup/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250715_YScan_LB1471C_quadA_manual_setup_Z05000"
+base_dir = "/Users/asca/Documents/University/Master Thesis/code/Data/manual setup/20250910/VIGO17_333-2_QPD_0750_20_AP_011_CC_250910_LB1471C_quadC_manual_setup_fixedY_Z50mm" 
 
 # Function to load data from a .pkl file
 def load_data(file_path):
@@ -64,17 +67,18 @@ for y_um, y_folder in y_positions:
     data = load_data(pkl_file)
     
     # Extract X position array
-    xstart = data['global_params']['xstart_um']
-    xstop = data['global_params']['xstop_um']
-    xstep = data['global_params']['xstep_um']
+    xstart = data['global_params']['xstart_mm']
+    xstop = data['global_params']['xstop_mm']
+    xstep = data['global_params']['xstep_mm']
     steps = int((xstop - xstart) / xstep) + 1
     x_array = np.linspace(xstart, xstop, steps)
     
     # Create plot
     fig, ax = plt.subplots(figsize=(10, 6), layout='constrained')
-    ax.plot(x_array, data['rawdata']['quadA']['dmm00_curr_amp'].mean(axis=1), label='quadA')
+    ax.plot(x_array, data['rawdata']['quadC']['dmm00_curr_amp'].mean(axis=1), label='quadC') # change quad here if needed
     ax.legend(fontsize=12)
-    ax.set_title(rf'\textbf{{DC Photocurrent at Y={y_um}mm}}', fontsize=14, fontweight='bold', pad=10)
+    ax.set_title(rf'\textbf{{DC Photocurrent at Y={y_um}\textmu{{}}m}}', 
+             fontsize=14, fontweight='bold', pad=10)
     ax.set_xlabel(r'X Position [mm]', fontsize=14)
     ax.set_ylabel(r'Photocurrent [A]', fontsize=14)
     ax.grid(True, linestyle='--', alpha=0.6)
