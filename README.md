@@ -1,3 +1,3 @@
 # LISA: QPD Gap Response Investigation
 
-Data available here: ... (create link to data storage; use HADRON)
+Data available here: (HADRON link coming soon...)
