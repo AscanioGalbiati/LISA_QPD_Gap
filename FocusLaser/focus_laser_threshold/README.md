@@ -1,4 +1,5 @@
-### CODE GUIDE:
-linescan_laserprofile_dc_thresholds_quadA.py: plots DC photocurrent output at different z positions and generates the beam focusing profile.
+### DATA ANALYSIS
+The code to analise data obtained with "focus_laser_threshold_quadA.py" corresponds to "linescan_laserprofile_dc_quadA.py" inside the FocusLaser general folder.
 
-KE_vs_ScanningSlit_Shift_Fit.py: compares measurements from the BP209-VIS against the results of the knife-edge (KE) technique.
+### DATA
+STILL TO BE DOWNLOADED

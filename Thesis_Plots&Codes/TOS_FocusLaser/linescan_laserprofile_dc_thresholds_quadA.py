@@ -2,7 +2,7 @@
 This code processes data from a series of .pkl files, extracting the DC photocurrent and calculating the beam waist for the quadA segment.
 
 Compatible data:
-/Users/asca/Documents/University/Master Thesis/code/Data/VIGO17_NS089008_QPD_0750_20_AS_015_CC_asca_250617_focus_laser_thres_LB1471C_quadA/Y6100um
+final_data/20250617/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250617_thresholds_LB1471C_quadA/Y6100um
 '''
 import re
 import os

@@ -4,6 +4,9 @@ QPD (quad-A) + BP SLIT-SCANNER COMPARISON
 Slit Z shifted by +14.62 mm
 ERF-fit
 Z-mask for slit data + full arm-fit (θ & w₀) reporting
+
+Compatible data:
+final_data/20250617/VIGO17_NS089008_QPD_0750_20_AS_015_CC_250617_thresholds_LB1471C_quadA/Y6100um
 """
 import re
 import os
