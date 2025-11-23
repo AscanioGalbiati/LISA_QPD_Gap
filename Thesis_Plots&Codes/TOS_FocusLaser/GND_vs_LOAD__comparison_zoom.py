@@ -6,7 +6,7 @@ Created on Nov 22 2025
 Zoom in plot of the termination comparison (GND vs LOAD) in the gap region.
 
 Compatible data: 
-20251027/VIGO_NS089008_QPD_750_20_AS_0011_CC_objLens_quadABCD_manual_setup_GND_LOAD_XY/HorizontalScan
+final_data/20251027/VIGO_NS089008_QPD_750_20_AS_0011_CC_objLens_quadABCD_manual_setup_GND_LOAD_XY/HorizontalScan
 
 Author: Ascanio Galbiati
 '''
