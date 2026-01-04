@@ -1,0 +1,3 @@
+Y_position_um,Overshoot_LOAD_%,Overshoot_GND_%,Max_in_gap_LOAD_µA,Max_in_gap_GND_µA,Mean_plateau_LOAD_µA,Mean_plateau_GND_µA
+2000,+0.104,+0.066,13066.455,13061.151,13052.838,13052.570
+2250,+1.436,+1.245,13102.204,13077.074,12916.745,12916.207
